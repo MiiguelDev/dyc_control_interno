@@ -14,19 +14,20 @@ $is_admin = $_SESSION['is_admin'] ?? false;
 
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Inicio</title>
-    <!-- Aquí puedes incluir tus archivos CSS o JS -->
+<head>    <!-- Aquí puedes incluir tus archivos CSS o JS -->
 </head>
 <body>
     <?php if ($is_admin): ?>
-        <h1>Bienvenido Administrador</h1>
+        <!-- Descomentar para pruebas -->
+        <!-- <h1>Bienvenido Administrador</h1> -->
         <!-- Aquí puedes incluir contenido específico para el administrador -->
     <?php else: ?>
-        <h1>Bienvenido Usuario</h1>
+        <!-- <h1>Bienvenido Usuario</h1> -->
         <!-- Aquí puedes incluir contenido específico para los usuarios normales -->
     <?php endif; ?>
 
     <!-- Aquí puedes incluir más contenido que sea común para ambos, administradores y usuarios -->
+    <?php include '../templates/header.php'; ?>
+    <?php include '../templates/footer.php'; ?>
 </body>
 </html>
