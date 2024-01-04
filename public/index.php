@@ -2,9 +2,10 @@
 session_start();
 include '../config/db.php';
 
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-var_dump($_POST);
+// Debugging, descomentar para testeos y pruebas
+// ini_set('display_errors', 1);
+// error_reporting(E_ALL);
+// var_dump($_POST);
 $loginError = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

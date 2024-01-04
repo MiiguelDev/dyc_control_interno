@@ -15,7 +15,7 @@ $is_admin = $_SESSION['is_admin'] ?? false;
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Main Page</title>
+    <title>Inicio</title>
     <!-- Aquí puedes incluir tus archivos CSS o JS -->
 </head>
 <body>
