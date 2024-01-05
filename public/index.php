@@ -6,6 +6,7 @@ include '../config/db.php';
 // ini_set('display_errors', 1);
 // error_reporting(E_ALL);
 // var_dump($_POST);
+
 $loginError = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -22,13 +23,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $result->fetch_assoc();
 
         // Debugging
-        var_dump($password);
-        var_dump($user['password']);
-        var_dump(password_verify($password, $user['password']));
+        // var_dump($password);
+        // var_dump($user['password']);
+        // var_dump(password_verify($password, $user['password']));
 
         if (password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['is_admin'] = $user['es_admin'];
+
+            // Si el usuario eligió "Recordar Contraseña", establecer una cookie para el email
+            if (isset($_POST['remember'])) {
+                setcookie('email', $email, time() + (86400 * 30), "/"); // Cookie válida por 30 días
+            }
 
             header("Location: main.php");
             exit();
@@ -46,3 +52,4 @@ if ($loginError) {
     echo $loginError;
 }
 ?>
+
