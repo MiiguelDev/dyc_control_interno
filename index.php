@@ -19,7 +19,7 @@
                     <div class="card shadow-1-strong" style="border-radius: 0.75rem;">
                         <div class="card-body p-5 text-center">
 
-                            <h3 class="mb-5">Sistema Inventario DYC</h3>
+                            <h3 class="mb-5">Control Interno DYC</h3>
 
                             <form method="post" action="public/index.php">
                                 <div class="form-outline mb-4">

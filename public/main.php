@@ -30,7 +30,8 @@ $is_admin = isUserAdmin();
                 <p><a href="#">Registro de mis servicios</a></p>
             </div>
             <div class="col-sm-8 text-left pt-4">
-                <h1>Bienvenido <?php if ($is_admin) : ?> Administrador<?php endif; ?></h1>
+                <h1>Bienvenido 
+                    <?php if ($is_admin) : ?> Administrador<?php endif; ?></h1>
                 <p>Aca iran listados eventualmente los ultimos trabajos realizados de manera modular ordenados por fecha</p>
                 <hr>
                 <h3>Segundo bloque de contenido</h3>
