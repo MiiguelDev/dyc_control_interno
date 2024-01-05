@@ -17,3 +17,9 @@
     background-color: #c4941c; /* Un tono más oscuro para el efecto hover */
     color: white;
 }
+
+.disabled-link {
+    pointer-events: none; 
+    color: grey;
+    cursor: default;
+}

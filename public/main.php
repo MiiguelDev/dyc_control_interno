@@ -27,7 +27,7 @@ $is_admin = isUserAdmin();
             <div class="col-sm-2 sidenav pt-5">
                 <p><a href="#">Mis ingresos</a></p>
                 <p><a href="#">Mis salidas</a></p>
-                <p><a href="#">Registro de mis servicios</a></p>
+                <p><a class="disabled-link" href="#">Registro de mis servicios</a></p>
             </div>
             <div class="col-sm-8 text-left pt-4">
                 <h1>Bienvenido 
