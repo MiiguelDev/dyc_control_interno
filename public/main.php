@@ -11,17 +11,12 @@ $is_admin = isUserAdmin();
 </head>
 
 <body>
-    <?php if ($is_admin) : ?>
-        <!-- Descomentar para pruebas -->
-        <!-- <h1>Bienvenido Administrador</h1> -->
-        <!-- Aquí puedes incluir contenido específico para el administrador -->
-    <?php else : ?>
-        <!-- <h1>Bienvenido Usuario</h1> -->
-        <!-- Aquí puedes incluir contenido específico para los usuarios normales -->
-    <?php endif; ?>
-
+    <?php if ($is_admin) { ?>
+        <?php include '../templates/header_admin.php'; ?>
+    <?php } else { ?>
+        <?php include '../templates/header_user.php'; ?>
+    <?php } ?>
     <!-- Aquí puedes incluir más contenido que sea común para ambos, administradores y usuarios -->
-    <?php include '../templates/header.php'; ?>
     <div class="container-fluid text-center">
         <div class="row content">
             <!-- A implementar en el futuro -->
@@ -32,7 +27,7 @@ $is_admin = isUserAdmin();
             </div> -->
             <div class="col-sm-8 text-left pt-4">
                 <h2>Bienvenido 
-                    <?php if ($is_admin) : ?> Administrador<?php endif; ?></h2>
+                    <?php if ($is_admin) : ?> Administrador <?php else : ?> Usuario<?php endif; ?></h2>
                 <p>Aca iran listados eventualmente los ultimos trabajos realizados del usuario de manera modular ordenados por fecha</p>
                 <hr>
                 <h3>Segundo bloque de contenido</h3>
