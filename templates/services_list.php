@@ -5,7 +5,7 @@ include '../config/get_services.php';
 // Obtener los servicios
 $servicios = obtenerServicios();
 
-var_dump($servicios);
+// var_dump($servicios);
 ?>
 
 <!-- Código HTML y Bootstrap para mostrar la lista -->

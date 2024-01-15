@@ -1,10 +1,11 @@
 <?php
 
-function obtenerServicios() {
+function obtenerServicios()
+{
     include '../config/db.php';
 
     // Consulta para obtener los servicios ordenados por fecha de manera descendente
-    $query = "SELECT id, categoria, cliente, descripcionCorta, fechaServicio, descripcionCompleta FROM servicios ORDER BY fechaServicio ASC";
+    $query = "SELECT id, categoria, cliente, descripcionCorta, fechaServicio, descripcionCompleta FROM servicios ORDER BY fechaServicio ASC LIMIT 5";
     $result = mysqli_query($conn, $query);
 
     // Verificar si hubo errores en la consulta
@@ -20,6 +21,3 @@ function obtenerServicios() {
         return []; // Devolver un array vacío si no hay resultados
     }
 }
-
-?>
-
