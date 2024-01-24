@@ -4,8 +4,25 @@ function obtenerServicios()
 {
     include '../config/db.php';
 
-    // Consulta para obtener los servicios ordenados por fecha de manera descendente
-    $query = "SELECT id, categoria, cliente, descripcionCorta, fechaServicio, descripcionCompleta FROM servicios ORDER BY fechaServicio ASC LIMIT 5";
+    // Consulta para obtener los servicios con nombre y apellido del trabajador
+    $query = "SELECT 
+                s.id AS id_servicio,
+                c.nombreCategoria AS categoria,
+                cl.nombreCliente AS cliente,
+                lt.nombreLugarTrabajo AS lugarTrabajo,
+                s.descripcionCorta,
+                s.fechaServicio,
+                s.descripcionCompleta,
+                t.nombre AS nombre_trabajador,
+                t.apellido AS apellido_trabajador
+                FROM servicios s
+                JOIN categorias c ON s.categoriaId = c.categoriaId
+                JOIN clientes cl ON s.clienteId = cl.clienteId
+                JOIN lugaresTrabajo lt ON s.lugarTrabajoId = lt.lugarTrabajoId
+                JOIN servicioTrabajador st ON s.id = st.servicioId
+                JOIN trabajadores t ON st.trabajadorId = t.trabajadorId
+                ORDER BY s.fechaServicio DESC LIMIT 5";
+
     $result = mysqli_query($conn, $query);
 
     // Verificar si hubo errores en la consulta
