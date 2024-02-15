@@ -24,10 +24,16 @@
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav m-auto">
                     <li class="nav-item active"><a href="../public/main.php" class="nav-link">Ir al inicio</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Productos</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown02">
+                            <a class="dropdown-item" href="../templates/products.php">Listado de Productos</a>
+                        </div>
+                    </li>
                     <li class="nav-item">
                         <a href="../public/logout.php" class="nav-link">Cerrar Sesión</a>
                     </li>
-               </ul>
+                </ul>
             </div>
         </div>
     </nav>

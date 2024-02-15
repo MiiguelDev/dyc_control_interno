@@ -28,8 +28,6 @@ $is_admin = isUserAdmin();
             </div> -->
             <div class="col-sm-8 text-left pt-4">
                 <h2>Bienvenido <?= $is_admin ? 'Administrador' : 'Usuario'; ?></h2>
-                <p>Aca iran listados eventualmente los ultimos trabajos realizados del usuario de manera modular ordenados por fecha</p>
-                <?php include '../templates/services_list.php'; ?>
                 <hr>
                 <h3>Segundo bloque de contenido</h3>
                 <p>Aca iran listados indicaciones generales que se hayan efectuado en la semana, ordenadas por fecha, hora y quien lo indico.</p>

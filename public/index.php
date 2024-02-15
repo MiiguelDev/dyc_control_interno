@@ -80,27 +80,27 @@
         $stmt->close();
     }
 
-    // Actualización de contraseñas para los usuarios 'admin@example.com' y 'user@example.com'
-    $hashedAdminPassword = password_hash('admin', PASSWORD_DEFAULT);
-    $hashedUserPassword = password_hash('user', PASSWORD_DEFAULT);
+    // // Actualización de contraseñas para los usuarios 'admin@example.com' y 'user@example.com'
+    // $hashedAdminPassword = password_hash('admin', PASSWORD_DEFAULT);
+    // $hashedUserPassword = password_hash('user', PASSWORD_DEFAULT);
 
-    $updateAdminSql = "UPDATE usuarios SET password = ? WHERE email = 'admin@example.com'";
-    $updateUserSql = "UPDATE usuarios SET password = ? WHERE email = 'user@example.com'";
+    // $updateAdminSql = "UPDATE usuarios SET password = ? WHERE email = 'admin@example.com'";
+    // $updateUserSql = "UPDATE usuarios SET password = ? WHERE email = 'user@example.com'";
 
-    $updateAdminStmt = $conn->prepare($updateAdminSql);
-    $updateUserStmt = $conn->prepare($updateUserSql);
+    // $updateAdminStmt = $conn->prepare($updateAdminSql);
+    // $updateUserStmt = $conn->prepare($updateUserSql);
 
-    $updateAdminStmt->bind_param("s", $hashedAdminPassword);
-    $updateUserStmt->bind_param("s", $hashedUserPassword);
+    // $updateAdminStmt->bind_param("s", $hashedAdminPassword);
+    // $updateUserStmt->bind_param("s", $hashedUserPassword);
 
-    $updateAdminStmt->execute();
-    $updateUserStmt->execute();
+    // $updateAdminStmt->execute();
+    // $updateUserStmt->execute();
 
-    $updateAdminStmt->close();
-    $updateUserStmt->close();
+    // $updateAdminStmt->close();
+    // $updateUserStmt->close();
 
-    $conn->close();
-    ?>
+    // $conn->close();
+    // ?>
 
     <div class="container text-center">
         <?php if ($loginError) : ?>
