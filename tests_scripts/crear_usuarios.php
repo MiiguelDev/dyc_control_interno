@@ -3,7 +3,7 @@
 $host = '127.0.0.1';
 $dbname = 'inventario_master_dyc';
 $username = 'root';
-$password = ''; // Asume que no hay contraseña para el usuario root
+$password = 'admin'; // Asume que no hay contraseña para el usuario root
 $port = 3306;
 
 // Crear conexión
