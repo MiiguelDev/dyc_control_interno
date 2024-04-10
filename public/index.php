@@ -1,3 +1,69 @@
+<?php
+session_start();
+include '../config/db.php';
+
+// Debugging, descomentar para testeos y pruebas
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+// var_dump($_POST);
+
+$loginError = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $sql = "SELECT id, nombre, apellido, password, es_admin FROM usuarios WHERE email = ?";
+
+    // Debugging
+    // echo "SQL Query: $sql<br>";
+
+    $stmt = $conn->prepare($sql);
+
+    // Verificar si hubo errores en la preparación
+    if ($stmt === false) {
+        die("Error en la preparación de la consulta: " . $conn->error);
+    }
+
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+
+    // Verificar si hubo errores en la ejecución
+    if ($stmt === false) {
+        die("Error en la ejecución de la consulta: " . $stmt->error);
+    }
+
+    $result = $stmt->get_result();
+
+    // Debugging
+    // echo "Número de filas: " . $result->num_rows . "<br>";
+
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+
+        // Debugging
+        // echo "Contraseña hash en la base de datos: " . $user['password'] . "<br>";
+        // echo "Contraseña proporcionada: $password<br>";
+
+        if (password_verify($password, $user['password'])) {
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['is_admin'] = $user['es_admin'];
+
+            if (isset($_POST['remember'])) {
+                setcookie('email', $email, time() + (86400 * 30), "/"); // Cookie válida por 30 días
+            }
+
+            header("Location: main.php");
+            exit();
+        } else {
+            $loginError = 'Correo o contraseña inválidos';
+        }
+    } else {
+        $loginError = 'Correo o contraseña inválidos';
+    }
+    $stmt->close();
+}
+?>
 <!doctype html>
 <html lang="en">
 
@@ -14,94 +80,6 @@
 </head>
 
 <body>
-    <?php
-    session_start();
-    include '../config/db.php';
-
-    // Debugging, descomentar para testeos y pruebas
-    ini_set('display_errors', 1);
-    error_reporting(E_ALL);
-    // var_dump($_POST);
-
-    $loginError = '';
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-
-        $sql = "SELECT id, nombre, apellido, password, es_admin FROM usuarios WHERE email = ?";
-
-        // Debugging
-        echo "SQL Query: $sql<br>";
-
-        $stmt = $conn->prepare($sql);
-
-        // Verificar si hubo errores en la preparación
-        if ($stmt === false) {
-            die("Error en la preparación de la consulta: " . $conn->error);
-        }
-
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-
-        // Verificar si hubo errores en la ejecución
-        if ($stmt === false) {
-            die("Error en la ejecución de la consulta: " . $stmt->error);
-        }
-
-        $result = $stmt->get_result();
-
-        // Debugging
-        echo "Número de filas: " . $result->num_rows . "<br>";
-
-        if ($result->num_rows > 0) {
-            $user = $result->fetch_assoc();
-
-            // Debugging
-            echo "Contraseña hash en la base de datos: " . $user['password'] . "<br>";
-            echo "Contraseña proporcionada: $password<br>";
-
-            if (password_verify($password, $user['password'])) {
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['is_admin'] = $user['es_admin'];
-
-                if (isset($_POST['remember'])) {
-                    setcookie('email', $email, time() + (86400 * 30), "/"); // Cookie válida por 30 días
-                }
-
-                header("Location: main.php");
-                exit();
-            } else {
-                $loginError = 'Correo o contraseña inválidos';
-            }
-        } else {
-            $loginError = 'Correo o contraseña inválidos';
-        }
-        $stmt->close();
-    }
-
-    // // Actualización de contraseñas para los usuarios 'admin@example.com' y 'user@example.com'
-    // $hashedAdminPassword = password_hash('admin', PASSWORD_DEFAULT);
-    // $hashedUserPassword = password_hash('user', PASSWORD_DEFAULT);
-
-    // $updateAdminSql = "UPDATE usuarios SET password = ? WHERE email = 'admin@example.com'";
-    // $updateUserSql = "UPDATE usuarios SET password = ? WHERE email = 'user@example.com'";
-
-    // $updateAdminStmt = $conn->prepare($updateAdminSql);
-    // $updateUserStmt = $conn->prepare($updateUserSql);
-
-    // $updateAdminStmt->bind_param("s", $hashedAdminPassword);
-    // $updateUserStmt->bind_param("s", $hashedUserPassword);
-
-    // $updateAdminStmt->execute();
-    // $updateUserStmt->execute();
-
-    // $updateAdminStmt->close();
-    // $updateUserStmt->close();
-
-    // $conn->close();
-    // ?>
-
     <div class="container text-center">
         <?php if ($loginError) : ?>
             <div class="alert alert-danger" role="alert">
